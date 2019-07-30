@@ -4,6 +4,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import errorHandler from 'errorhandler';
 import { AddressInfo } from 'net';
+import connectMongoDB from './config/db';
+
+interface MiddlewareError extends Error {
+  status?: number;
+}
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
@@ -44,7 +49,15 @@ if (!isProduction) {
   });
 }
 
-const server = app.listen(process.env.PORT || 3000, (): void => {
-  const { port } = server.address() as AddressInfo;
-  console.log(`Listening on port ${port}`);
-});
+connectMongoDB()
+  .then((): void => {
+    console.log('DB connected.');
+
+    const server = app.listen(process.env.PORT || 3000, (): void => {
+      const { port } = server.address() as AddressInfo;
+      console.log(`Listening on port ${port}`);
+    });
+  })
+  .catch((e): void => {
+    console.error(e);
+  });

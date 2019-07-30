@@ -4,10 +4,10 @@
   "description": "Bit.ly clone built with Express and TypeScript",
   "main": "index.ts",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node -r dotenv/config dist/index.js",
     "build": "rimraf dist && babel . -d dist --ignore \"node_modules/**\" --extensions \".ts\"",
     "build-tsc": "rimraf dist && tsc",
-    "dev": "ts-node index.ts",
+    "dev": "ts-node -r dotenv/config index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nico Lance Medina <nico@nlmedina.com>",
@@ -34,6 +34,7 @@
     "@types/mongoose": "^5.5.11",
     "@types/morgan": "^1.7.36",
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "mongoose": "^5.6.7",
