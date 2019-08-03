@@ -1,7 +1,7 @@
 {
   "name": "node.ly",
   "version": "0.1.0",
-  "description": "Bit.ly clone built with Express and TypeScript",
+  "description": "A URL shortening service powered by MongoDB, TypeScript and Express",
   "main": "index.ts",
   "scripts": {
     "start": "node -r dotenv/config dist/index.js",
